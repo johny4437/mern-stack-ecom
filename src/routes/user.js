@@ -1,9 +1,9 @@
 const router = require('express').Router();
 const userController= require('../controllers/userController');
-const authController = require("../controllers/authController");
+const {requireSingin, isAdmin, isAuth} = require("../controllers/authController");
 
 
-router.get("/secret/:userId", authController.requireSingin,(request, response)=>{
+router.get("/secret/:userId", requireSingin, isAuth, isAdmin, (request, response)=>{
     response.json({
         user: request.profile
     })

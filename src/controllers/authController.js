@@ -52,3 +52,22 @@ exports.requireSingin = expressJwt({
     secret: process.env.JWT_SECRET,
     userProperty:"auth"
 })
+
+exports.isAuth = (request, response, next)=>{
+    let user = request.profile && request.auth && request.profile._id == request.auth._id;
+    if(!user){
+        return response.status(403).json({
+            error:"Access Denied"
+        })
+    }
+    next();
+}
+
+exports.isAdmin = (request, response, next) =>{
+    if(request.profile.role == 0){
+        return response.json({
+            error:"Admin resource. Access Denied"
+        })
+    }
+    next()
+}
