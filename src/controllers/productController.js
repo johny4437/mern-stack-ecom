@@ -133,6 +133,40 @@ exports.update = (request, response) =>{
                  error: "Product not found"
              })
          }
-         response.send(products)
+         response.json(products)
      }) 
- }
+ };
+
+/**
+ * it will find the product based on Category
+ * other product that have the same category will be returned
+ */
+exports.listRelated = (request, response) =>{
+    let limit = request.query.limit ? parseInt(request.query.limit):6;
+
+    Product.find({_id:{$ne: request.product}, category: request.product.category})
+    .limit(limit)
+    .populate('category', '_id name')
+    .exec((err,products) =>{
+        if(err){
+            return response.status(400).json({
+                error: "Product not found"
+            })
+        }
+        response.json(products)
+
+    })
+};
+
+exports.listCategories = (request,response) =>{
+    Product.distinct('category',{},(err, categories)=>{
+        if(err){
+            return response.status(400).json({
+                error: "Categorie not found"
+            })
+        }
+        response.json(categories);
+
+    
+    })  
+}
