@@ -114,4 +114,25 @@ exports.update = (request, response) =>{
 
 /**
  * sell/ Arrival
+ * by sell = /products?sortBy=sold&oerder=desc&limit=4
+ * by arrival = /products?sortBy=sold&createdAt=desc&limit=4
  */
+
+ exports.list = (request,response) =>{
+     let order = request.query.order ? request.query.order:'asc';
+     let sortBy = request.query.sortBy ? request.query.sortBy:'_id'; 
+     let limit = request.query.limit ? parseInt(request.query.limit):6;
+     Product.find()
+     .select("-photo")
+     .populate('category')
+     .sort([[sortBy, order]])
+     .limit(limit)
+     .exec((err, products)=>{
+         if(err){
+             return response.status(400).json({
+                 error: "Product not found"
+             })
+         }
+         response.send(products)
+     }) 
+ }
