@@ -9,6 +9,7 @@ const userRouter = require('./routes/user');
 const categoryRouter = require('./routes/category');
 const productRouter = require('./routes/product');
 const expressValidator = require('express-validator');
+const cors = require('cors');
 // app
 const app = express();
 
@@ -18,6 +19,8 @@ mongoose.connect(process.env.DATABASE,
      ).then(()=>console.log("DB CONNECTED"))
 
 //middleware
+app.use(cors());
+
 app.use(morgan("dev"));
 app.use(bodyParser.json()); 
 app.use(cookieParser());
