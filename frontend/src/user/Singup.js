@@ -1,9 +1,11 @@
-import React from 'react'
+import React from 'react';
+import Layout from '../core/Layout';
 
  function Singup() {
     return (
         <div>
-            <h2>SignUp</h2>
+            <Layout title="Singup" description="React Node E-commerce Site"></Layout>
+        
         </div>
     )
 }

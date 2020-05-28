@@ -1,9 +1,12 @@
-import React from 'react'
+import React from 'react';
+import Layout from '../core/Layout';
 
  function Singin() {
     return (
         <div>
-            <h2>Signin</h2>
+            
+           <Layout title="Singin" description="React Node E-commerce Site"></Layout>
+        
         </div>
     )
 }

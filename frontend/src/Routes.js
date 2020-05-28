@@ -4,6 +4,8 @@ import Singup from './user/Singup';
 import Singin from './user/Singin';
 import Home from './core/Home';
 
+
+
  function Routes() {
     return (
         <BrowserRouter>
