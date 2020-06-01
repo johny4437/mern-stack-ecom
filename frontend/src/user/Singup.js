@@ -1,4 +1,5 @@
 import React,{useState} from 'react';
+import {Link} from 'react-router-dom'
 import Layout from '../core/Layout';
 import {API} from '../Config';
 
@@ -9,17 +10,17 @@ import {API} from '../Config';
         email:'',
         password:'',
         error:'',
-        sucess:false
+        success:false
     });
 
-    const {name, email, password} = values;
+    const {name, email, password, success, error} = values;
 
     const handleChange = name => event =>{
         setValues({...values, error:false, [name]:event.target.value });
     };
 
     const Singup = user =>{
-        fetch(`${API}/singup`,{
+       return fetch(`${API}/singup`,{
             method:"POST",
             headers:{
                 Accept:'application/json',
@@ -37,7 +38,22 @@ import {API} from '../Config';
 
     const clickSubmit = event =>{
         event.preventDefault();
-        Singup({name, email, password})
+        setValues({...values, error:false})
+        Singup({name, email, password}).then(data =>{
+            if(data.error){
+                setValues({...values, error: data.error, success:false})    
+            }else{
+                setValues({
+                    ...values,
+                    name:'',
+                    email:'',
+                    password:'',
+                    error:'',
+                    success:true
+               
+                })
+            }
+        })
 
     }
     const singUpForm = () =>{
@@ -49,18 +65,49 @@ import {API} from '../Config';
                     onChange={handleChange('name')}
                      type="text" 
                      className="form-control"
+                     value={name}
                 />
             </div>
             <div className="form-group">
                 <label className="text-muted">Email</label>
-                <input  onChange={handleChange('email')} type="email" className="form-control"/>
+                <input  
+                onChange={handleChange('email')} 
+                type="email" 
+                className="form-control"
+                value={email}
+            />
             </div>
             <div className="form-group">
                 <label className="text-muted">Password</label>
-                <input  onChange={handleChange('password')} type="password" className="form-control"/>
+                <input  
+                onChange={handleChange('password')} 
+                type="password" 
+                className="form-control"
+                value={password}
+                />
             </div>
             <button onClick={clickSubmit} className="btn btn-primary">Submit</button>
         </form>
+        );
+    };
+
+    const showError = () =>{
+        return (
+            <div className="alert alert-danger" style={{display:error ? '' : 'none'}}>
+
+            {error}
+
+        </div>
+        );
+    };
+
+    const showSucess = () =>{
+        return (
+
+            <div className="alert alert-info"  style={{display:success ? '' : 'none'}}>
+            New account was created. Please <Link to="/singin">Singin</Link>
+             </div>
+
         );
     }
     return (
@@ -68,7 +115,8 @@ import {API} from '../Config';
             <Layout title="Singup" description="React Node E-commerce Site"
              className="container col-md-8 offset-md-2"
             >
-
+                {showSucess()}
+                {showError()}
                 {singUpForm()}
             
             </Layout>
