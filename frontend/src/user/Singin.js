@@ -1,6 +1,6 @@
 import React,{useState} from 'react';
 import Layout from '../core/Layout';
-import {singin} from   '../auth';
+import {singin, authenticate} from   '../auth';
 import { Redirect } from 'react-router-dom';
 
 
@@ -29,10 +29,12 @@ import { Redirect } from 'react-router-dom';
             if(data.error){
                 setValues({...values, error: data.error, loading:false})    
             }else{
-                setValues({
-                    ...values,
-                    redirectToReferrer:true
-               
+                authenticate( data, ()=>{
+                    setValues({
+                        ...values,
+                        redirectToReferrer:true
+                   
+                    })
                 })
             }
         })
