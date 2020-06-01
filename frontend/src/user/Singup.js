@@ -1,7 +1,7 @@
 import React,{useState} from 'react';
 import {Link} from 'react-router-dom'
 import Layout from '../core/Layout';
-import {API} from '../Config';
+import {singup} from '../auth/'
 
  function Singup() {
 
@@ -19,27 +19,12 @@ import {API} from '../Config';
         setValues({...values, error:false, [name]:event.target.value });
     };
 
-    const Singup = user =>{
-       return fetch(`${API}/singup`,{
-            method:"POST",
-            headers:{
-                Accept:'application/json',
-                "Content-Type":"application/json"
-
-            },
-            body:JSON.stringify(user)
-
-        })
-        .then(response =>{
-            return response.json()
-        })
-        .catch(err =>console.log(err))
-    };
+   
 
     const clickSubmit = event =>{
         event.preventDefault();
         setValues({...values, error:false})
-        Singup({name, email, password}).then(data =>{
+        singup({name, email, password}).then(data =>{
             if(data.error){
                 setValues({...values, error: data.error, success:false})    
             }else{
