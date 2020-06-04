@@ -1,6 +1,6 @@
 import React from 'react';
  import {Link, withRouter} from 'react-router-dom';
-import {singout} from  '../auth';
+import {singout, isAuthenticated} from  '../auth';
 
 
  const isActive = (history, path)=>{
@@ -18,12 +18,22 @@ function Menu({history}) {
                 <Link className="nav-link"  style={isActive(history, "/")} to="/">Home</Link>
             </li>
             <li className="nav-item">
+                <Link className="nav-link" style={isActive(history, "/user/dashboard")} to="/dashboard" >Dashboard</Link>
+            </li>
+            {!isAuthenticated() && (
+                <>               
+                 <li className="nav-item">
                 <Link className="nav-link" style={isActive(history, "/singin")} to="/singin" >Singin</Link>
-            </li>
-            <li className="nav-item">
+                </li>
+                <li className="nav-item">
                 <Link className="nav-link" style={isActive(history, "/singup")} to="/singup" >Singup</Link>
-            </li>
-            <li className="nav-item">
+                </li>
+               
+                </>
+
+            )}
+            {isAuthenticated() && (
+                <li className="nav-item">
                 <span className="nav-link"
                  style={{cursor:'pointer', color:'#ffffff'}}
                  onClick={()=> singout(()=>{
@@ -34,6 +44,7 @@ function Menu({history}) {
                 </span>
             </li>
 
+            )}
 
         </ul>
     )
