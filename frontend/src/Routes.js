@@ -3,8 +3,10 @@ import {BrowserRouter, Switch, Route} from 'react-router-dom';
 import Singup from './user/Singup';
 import Singin from './user/Singin';
 import Home from './core/Home';
-import PrivateRouter from './auth/PrivateRouter'
+import PrivateRouter from './auth/PrivateRouter';
+import AdminRoute from './auth/AdminRoute'
 import Dashboard from './user/UserDashboard';
+import AdminDashboard from './user/AdminDashboard';
 
 
  function Routes() {
@@ -15,6 +17,7 @@ import Dashboard from './user/UserDashboard';
                 <Route path="/singin" exact component={Singin}/>
                 <Route path="/singup"   exact component={Singup}/>
                 <PrivateRouter path="/user/dashboard" exact component={Dashboard}/>
+                <AdminRoute path="/admin/dashboard" exact component={AdminDashboard}/>
             </Switch>
         </BrowserRouter>
     )

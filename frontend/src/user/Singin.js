@@ -7,8 +7,8 @@ import { Redirect } from 'react-router-dom';
  function Singin() {
 
     const [values, setValues] = useState({
-        email:'',
-        password:'',
+        email:'larguetha@hotmail.com',
+        password:'viking123',
         error:'',
         loading:false,
         redirectToReferrer: false
@@ -90,6 +90,9 @@ import { Redirect } from 'react-router-dom';
             }else{
                 return <Redirect to="/user/dashboard" />
             }
+        }
+        if(isAuthenticated()){
+            return <Redirect to="/" />
         }
     }
       
