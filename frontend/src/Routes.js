@@ -7,7 +7,7 @@ import PrivateRouter from './auth/PrivateRouter';
 import AdminRoute from './auth/AdminRoute'
 import Dashboard from './user/UserDashboard';
 import AdminDashboard from './user/AdminDashboard';
-
+import AddCategory from './Admin/AddCategory';
 
  function Routes() {
     return (
@@ -18,6 +18,7 @@ import AdminDashboard from './user/AdminDashboard';
                 <Route path="/singup"   exact component={Singup}/>
                 <PrivateRouter path="/user/dashboard" exact component={Dashboard}/>
                 <AdminRoute path="/admin/dashboard" exact component={AdminDashboard}/>
+                <AdminRoute path="/create/category" exact component={AddCategory}/>
             </Switch>
         </BrowserRouter>
     )

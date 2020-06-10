@@ -1,10 +1,10 @@
-import React,{Component} from 'react';
+import React from 'react';
 import {Route, Redirect} from 'react-router-dom';
 import {isAuthenticated} from './index'
 
 function AdminRoute({component:Component, ...rest}) {
     return (
-        <Route {...rest}  render={props => isAuthenticated()  && isAuthenticated().user.role == 1 ? (
+        <Route {...rest}  render={props => isAuthenticated()  && isAuthenticated().user.role === 1 ? (
             <Component {...props}/>
         ) : (
             <Redirect to={{pathname:'/singin', state:{from:props.location}}}/>

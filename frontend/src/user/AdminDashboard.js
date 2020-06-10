@@ -1,10 +1,10 @@
 import React from 'react';
-import {Route, Link}  from 'react-router-dom';
+import {Link}  from 'react-router-dom';
 import Layout from '../core/Layout';
 import {isAuthenticated} from '../auth/index';
  function AdminDashboard() {
 
-    const { user:{_id, name, email, role}} = isAuthenticated();
+    const { user:{ name, email, role}} = isAuthenticated();
    
     const adminLinks = () =>{
         return(
