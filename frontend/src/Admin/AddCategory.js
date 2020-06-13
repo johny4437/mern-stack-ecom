@@ -2,6 +2,7 @@ import React,{useState} from 'react';
 import Layout from '../core/Layout';
 import {isAuthenticated} from '../auth/index';
 import {createCategory}  from './apiAdmin';
+import { Link } from 'react-router-dom';
 
 function AddCategory(){
     const [name , setName] = useState('');
@@ -16,20 +17,20 @@ function AddCategory(){
 
     const handleChange = e =>{
        
-        setError('');
+        setError("");
         setName(e.target.value);
     }
 
     const clickSubmit = e =>{
         e.preventDefault();
-        setError('');
+        setError("");
         setSuccess(false);
         createCategory(user._id, token, {name})
         .then(data =>{
             if(data.error){
                 setError(true)
             }else{
-                setError('');
+                setError("");
                 setSuccess(true);
             }
         })
@@ -59,9 +60,15 @@ function AddCategory(){
     }
     const showError = () =>{
         if(error){
-        return <h3 className="text-error" >{name} need to be unique</h3>
+        return <h3 className="text-error" >{error}</h3>
         }
     }
+    const goBack = () =>(
+        <div className="mt-5">
+            <Link to="/admin/dashboard" className="text-warning">Back to dashboard</Link>
+        </div>
+    );
+
 
     return (
         <Layout title="Add Category" 
@@ -71,9 +78,10 @@ function AddCategory(){
         <div className="row">
 
             <div className="col-md-8 offset-md-2">
-                {showSuccess()}
                 {showError()}
+                {showSuccess()}
                 {newCategoryForm()}
+                {goBack()}
             </div>
         </div>
         
