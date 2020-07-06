@@ -179,8 +179,9 @@ function AddProduct(){
                 <div className="col md-8 offset-md-2">
                     {showLoading()}
                     {showError()}
-                    {showSuccess()}
+                    
                     {newPostForm()}
+                    {showSuccess()}
                 </div>
 
            </div>

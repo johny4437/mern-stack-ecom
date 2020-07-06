@@ -57,3 +57,14 @@ exports.remove =(request, response)=>{
         response.json({message:"Category was removed"})
     })
 }
+
+exports.list = (request, response) =>{
+    Category.find().exec((err,data)=>{
+        if(err){
+            return response.status(400).json({
+                error:errorHandler(err)
+            })
+        }
+        response.json(data)
+    })
+}

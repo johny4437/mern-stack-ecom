@@ -7,8 +7,8 @@ import { Redirect } from 'react-router-dom';
  function Singin() {
 
     const [values, setValues] = useState({
-        email:'larguetha@hotmail.com',
-        password:'viking123',
+        email:'roger157@hotmail.com',
+        password:'roger157',
         error:'',
         loading:false,
         redirectToReferrer: false
