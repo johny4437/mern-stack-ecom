@@ -1,26 +1,28 @@
 import React from 'react';
-import {Link} from 'react-router-dom'
+import {Link} from 'react-router-dom';
+import ShowImage from  './ShowImage';
 
-export default function Card({product}) {
+export default function Card({product }) {
     return (
-        <div>
+        
             <div className="col-4 mb-3">
                 <div className="card">
                     <div className="card-header">{product.name}</div>
                     <div className="card-body">
+                        <ShowImage item={product} url="products"/>
                         <p>{product.description}</p>
                         <p>${product.price}</p>
                         <Link to="/">
-                            <div className="btn btn-outline-primary mt-2 mb-2">
+                            <button className="btn btn-outline-primary mt-2 mb-2 mr-2">
                                 View Product
-                            </div>
+                            </button>
                         </Link>
-                        <div className="btn btn-outline-warning mt-2 mb-2">
+                        <button className="btn btn-outline-warning mt-2 mb-2 ">
                                 Add to Cart
-                        </div>
+                        </button>
                     </div>
                 </div>
             </div>
-        </div>
+        
     )
 }
