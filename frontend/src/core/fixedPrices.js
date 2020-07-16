@@ -1,4 +1,4 @@
- const prices = [ 
+export const prices = [ 
     {
         _id:0,
         name:"any",
@@ -37,5 +37,3 @@
     }
 ];
 
-
-export default prices;
