@@ -51,7 +51,9 @@ exports.create = (request, response)=>{
     })
 };
 exports.productId = (request, response, next, id) =>{
-    Product.findById(id).exec((err, product)=>{
+    Product.findById(id)
+    .populate('category')
+    .exec((err, product)=>{
         if(err || !product){
             return response.status(400).json({
                 error:"Product Not Found"

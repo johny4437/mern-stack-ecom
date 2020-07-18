@@ -48,14 +48,21 @@ useEffect(()=>{
               <div className="row">
               
               {productsBySell.map((product,i)=>(
-                  <Card key={i} product={product}></Card>
+                  <div key={i}  className="col-4 mb-3">
+                        <Card  product={product}></Card>
+                  </div>
+                  
               ))}
               </div>
               <h2 className="mb-4">Best Sellers</h2>
 
               <div className="row">
                 {productsBySell.map((product,i)=>(
-                  <Card key={i} product={product}></Card>
+
+                    <div  key={i} className="col-4 mb-3">
+                        <Card product={product}></Card>
+                    </div>
+                  
                 ))}
               </div>
              

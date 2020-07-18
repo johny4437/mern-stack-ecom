@@ -5,6 +5,35 @@
 Product image on card
 */
 
+.black-10 {
+    background: #f2f2f2;
+}
+.black-9 {
+    background: #e6e6e6;
+}
+.black-8 {
+    background: #d9d9d9;
+}
+.black-7 {
+    background: #cccccc;
+}
+.black-6 {
+    background: #bfbfbf;
+}
+.black-5 {
+    background: #b3b3b3;
+}
+
+
+/* Product name */
+
+.name{
+    background: indigo;
+    color: #fff;
+    font-weight: bold;
+}
+
+/* Black 10 to 1 */
 .product-img{
     min-height: 100px;
 }
