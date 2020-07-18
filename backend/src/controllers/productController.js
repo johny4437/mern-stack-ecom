@@ -3,6 +3,7 @@ const formidable = require("formidable");
 const _ = require('lodash');
 var fs = require('fs');
 const {errorHandler}= require("../helpers/dbErrorHandler");
+const { request } = require("http");
 
 
 exports.read = (request, response) =>{
@@ -232,4 +233,25 @@ exports.photo = (request, response, next) =>{
     }
     next();
     
+}
+
+exports.listSearch = (request, response) =>{
+    const query = {};
+
+    if(request.query.search){
+        query.name ={$regex: request.query.search, $options:"i"}
+
+        if(request.query.category && request.query.category != 'All'){
+            query.category = request.query.category
+        }
+
+        Product.find(query,(err, products)=>{
+            if(err){
+                return response.status(400).json({
+                    error:errorHandler(err)
+                })
+            }
+            response.json(products)
+        }).select("-photo")
+    }
 }

@@ -2,6 +2,7 @@ import React,{useState, useEffect} from 'react';
 import Layout from './Layout';
 import {getProducts} from '../core/apiCore';
 import Card from  './Card';
+import Search from './Search';
 
  function Home() {
 
@@ -41,6 +42,8 @@ useEffect(()=>{
         <div>
            <Layout title="Home Page" description="React Node E-commerce Site">
 
+               <Search/>    
+
            <h2 className="mb-4">Products Arrival</h2>
               <div className="row">
               
@@ -59,6 +62,7 @@ useEffect(()=>{
 
             
            </Layout>
+
         </div>
     )
 }
