@@ -1,11 +1,12 @@
 import React,{useState, useEffect} from 'react';
 import Layout from './Layout';
-import {read} from '../core/apiCore';
+import {read, listRealated} from '../core/apiCore';
 import Card from  './Card';
 import Search from './Search';
 
 function Product(props){
     const [product, setProduct] = useState({});
+    const [relatedProduct, setRelatedProduc] = useState([])
     const [error, setError] = useState(false);
 
     const loadSingleProduct = productId =>{
@@ -14,6 +15,15 @@ function Product(props){
                     setError(data.error)
                 }else{
                     setProduct(data)
+
+                    // related Products
+                    listRealated(data._id).then(response=>{
+                        if(response.error){
+                            setError(response.error)
+                        }else{
+                            setRelatedProduc(response)
+                        }
+                    })
                 }
             })
     }
@@ -22,7 +32,7 @@ function Product(props){
         const productId = props.match.params.productId;
 
         loadSingleProduct(productId)
-    }, [])
+    }, [props])
     return (
         <div>
            <Layout title={ product && product.name} 
@@ -31,7 +41,18 @@ function Product(props){
                
                 <div className="row">
 
-                    {product && product.description && <Card product={product} showViewProductButton={false}/>}
+                   <div className="col-8">
+                   {product && product.description && <Card product={product} showViewProductButton={false}/>}
+                   </div>
+                   <div className="col-4">
+                       <h4>Related Products</h4>
+                       {relatedProduct.map((p,i)=>(
+                           <div className="mb-3">
+                               <Card key={i} product={p}/>
+                           </div>
+                           
+                       ))}
+                   </div>
 
 
                 </div>

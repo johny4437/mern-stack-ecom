@@ -10,6 +10,7 @@ import AdminDashboard from './user/AdminDashboard';
 import AddCategory from './Admin/AddCategory';
 import AddProduct from './Admin/AddProduct';
 import Shop from  './core/Shop';
+import Cart from  './core/Cart';
 import Product from  './core/Product';
  function Routes() {
     return (
@@ -17,6 +18,7 @@ import Product from  './core/Product';
             <Switch>
                 <Route path="/" exact component={Home}/>
                 <Route path="/shop" exact component={Shop}/>
+                <Route path="/cart" exact component={Cart}/>
                 <Route path="/product/:productId" exact component={Product}/>
                 <Route path="/singin" exact component={Singin}/>
                 <Route path="/singup"   exact component={Singup}/>
